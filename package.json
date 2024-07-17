@@ -1,0 +1,23 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxt/fonts": "^0.7.1",
+    "@nuxt/icon": "^1.1.1",
+    "@nuxtjs/tailwindcss": "^6.12.1",
+    "nuxt": "^3.12.3",
+    "vue": "latest"
+  },
+  "devDependencies": {
+    "@iconify-json/mdi": "^1.1.67",
+    "@iconify-json/uil": "^1.1.8"
+  }
+}
