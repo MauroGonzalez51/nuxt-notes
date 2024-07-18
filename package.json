@@ -10,9 +10,11 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@next-auth/prisma-adapter": "^1.0.7",
     "@nuxt/fonts": "^0.7.1",
     "@nuxt/icon": "^1.1.1",
     "@nuxt/image": "^1.7.0",
+    "@prisma/nuxt": "^0.0.30",
     "@sidebase/nuxt-auth": "^0.8.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -29,6 +31,8 @@
     "@iconify-json/uil": "^1.1.8",
     "@nuxtjs/color-mode": "^3.4.2",
     "@nuxtjs/tailwindcss": "^6.12.1",
+    "@prisma/client": "^5.17.0",
+    "prisma": "^5.17.0",
     "typescript": "^5.5.3"
   }
 }
