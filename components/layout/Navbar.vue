@@ -11,16 +11,11 @@ const items: navbarlink[] = [
 		to: "/",
 		icon: "mdi:home",
 	},
-	{
-		label: "Login",
-		to: "/auth/login",
-		icon: "mdi:account",
-	},
 ];
 </script>
 
 <template>
-	<header class="h-24 bg-gray-900/20 flex items-center">
+	<header class="h-24 bg-secondary flex items-center">
 		<nav class="mx-20 grid grid-cols-2 w-full justify-between items-center">
 			<div class="inline-flex items-center gap-2">
 				<Icon name="mdi:note" class="text-4xl text-gray-800" />
@@ -43,6 +38,7 @@ const items: navbarlink[] = [
 						{{ item.label }}
 					</NuxtLink>
 				</div>
+				<NavbarUserMenu />
 			</div>
 		</nav>
 	</header>
