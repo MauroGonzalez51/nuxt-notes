@@ -39,6 +39,7 @@ const items: navbarlink[] = [
 					</NuxtLink>
 				</div>
 				<NavbarUserMenu />
+				<NavbarColorSchema />
 			</div>
 		</nav>
 	</header>

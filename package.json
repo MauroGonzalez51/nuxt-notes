@@ -27,6 +27,7 @@
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.67",
     "@iconify-json/uil": "^1.1.8",
+    "@nuxtjs/color-mode": "^3.4.2",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "typescript": "^5.5.3"
   }
