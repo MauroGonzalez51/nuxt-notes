@@ -25,7 +25,10 @@ const src = data.value?.user?.image || "/default.png";
 <template>
 	<DropdownMenu>
 		<DropdownMenuTrigger v-if="loggedIn">
-			<NuxtImg :src="src" class="size-10 rounded-full border-2 border-primary " />
+			<NuxtImg
+				:src="src"
+				class="size-10 rounded-full border-2 border-secondary dark:border-primary"
+			/>
 		</DropdownMenuTrigger>
 
 		<DropdownMenuTrigger
@@ -38,7 +41,7 @@ const src = data.value?.user?.image || "/default.png";
 		<DropdownMenuContent>
 			<DropdownMenuLabel>My Account</DropdownMenuLabel>
 
-			<DropdownMenuSeparator class="bg-gray-500/20" />
+			<DropdownMenuSeparator />
 
 			<DropdownMenuItem v-for="item in items">
 				<NuxtLink

@@ -18,8 +18,8 @@ const items: navbarlink[] = [
 	<header class="h-full bg-secondary flex items-center">
 		<nav class="mx-20 grid grid-cols-2 w-full justify-between items-center">
 			<div class="inline-flex items-center gap-2">
-				<Icon name="mdi:note" class="text-4xl text-gray-800" />
-				<div class="capitalize text-3xl font-bold text-gray-800">
+				<Icon name="mdi:note" class="text-4xl text-primary" />
+				<div class="capitalize text-3xl font-bold text-primary">
 					Notes
 				</div>
 			</div>
