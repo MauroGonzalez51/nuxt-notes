@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import { useToast } from "~/components/ui/toast";
-
 definePageMeta({
 	auth: false,
 });
-
 </script>
 
 <template>

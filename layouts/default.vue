@@ -1,9 +1,9 @@
 <template>
 	<div class="min-h-screen w-screen">
-		<div class="h-24">
+		<div class="h-14 border-b border-gray-200 dark:border-slate-700">
 			<LayoutNavbar />
 		</div>
-		<main class="h-[calc(100dvh-6rem)]">
+		<main class="h-[calc(100dvh-6rem)] bg-slate-50  dark:bg-gray-900">
 			<slot />
 		</main>
 	</div>

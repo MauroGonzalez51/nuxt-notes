@@ -1,38 +1,27 @@
 <script setup lang="ts">
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
-
+import { Toggle } from "@/components/ui/toggle";
 import { useToast } from "@/components/ui/toast";
-import { capitalize } from "vue";
 
-const colorSchema = useColorMode();
+const colorMode = useColorMode();
 const { toast } = useToast();
 
-const onUpdate = (value: string) => {
-	colorSchema.preference = value;
+const onUpdate = (_value: boolean) => {
+	if (colorMode.value === "light") colorMode.preference = "dark";
+	if (colorMode.value === "dark") colorMode.preference = "light";
+
 	toast({
-		title: `Schema mode changed to ${capitalize(colorSchema.preference)}`,
+		title: `Changed to ${colorMode.preference}`,
+		description: "Press again to revert the changes",
 	});
 };
 </script>
 
 <template>
-	<Select
-		:onUpdate:modelValue="onUpdate"
-		:defaultValue="colorSchema.preference"
-	>
-		<SelectTrigger class="max-w-36">
-			<SelectValue placeholder="Color schema" />
-		</SelectTrigger>
-		<SelectContent>
-			<SelectItem value="light">Light</SelectItem>
-			<SelectItem value="dark">Dark</SelectItem>
-			<SelectItem value="system">System</SelectItem>
-		</SelectContent>
-	</Select>
+	<Toggle variant="outline" class="bg-gray-300/50 hover:bg-gray-300/80" :onUpdate:pressed="onUpdate">
+		<Icon
+			name="mdi:white-balance-sunny"
+			v-if="colorMode.preference === 'light'"
+		/>
+		<Icon name="mdi:weather-night" v-if="colorMode.preference === 'dark'" />
+	</Toggle>
 </template>

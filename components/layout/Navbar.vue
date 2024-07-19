@@ -7,7 +7,7 @@ interface navbarlink {
 
 const items: navbarlink[] = [
 	{
-		label: "home",
+		label: "Home",
 		to: "/",
 		icon: "mdi:home",
 	},
@@ -15,29 +15,21 @@ const items: navbarlink[] = [
 </script>
 
 <template>
-	<header class="h-full bg-secondary flex items-center">
+	<header class="h-full bg-slate-50 dark:bg-gray-900 flex items-center">
 		<nav class="mx-20 grid grid-cols-2 w-full justify-between items-center">
-			<div class="inline-flex items-center gap-2">
-				<Icon name="mdi:note" class="text-4xl text-primary" />
-				<div class="capitalize text-3xl font-bold text-primary">
-					Notes
-				</div>
-			</div>
-
-			<div class="flex items-center justify-end gap-4">
-				<div
-					v-for="item in items"
-					:key="item.label"
-					class="flex flex-col items-center"
-				>
-					<Icon :name="item.icon" class="text-3xl md:hidden" />
-					<NuxtLink
-						:to="item.to"
-						class="capitalize hidden md:block text-xl hover:underline cursor-pointer font-bold"
-					>
+			<div class="inline-flex items-center justify-start gap-4 h-full">
+				<NuxtLink class="inline-flex items-center gap-1 font-bold">
+					<Icon name="mdi:note" class="text-2xl" />
+					<span class="text-lg">Notes</span>
+				</NuxtLink>
+				<div class="inline-flex items-center h-full text-gray-500/80 dark:text-gray-300 ">
+					<NuxtLink v-for="item in items" :to="item.to">
 						{{ item.label }}
 					</NuxtLink>
 				</div>
+			</div>
+
+			<div class="inline-flex items-end justify-end gap-4">
 				<NavbarUserMenu />
 				<NavbarColorSchema />
 			</div>

@@ -9,7 +9,12 @@ const { getProviders, signIn, signOut, status, data } = useAuth();
 
 const items: UserLinks[] = [
 	{
-		label: "Profile",
+		label: "Home",
+		icon: "mdi:home",
+		to: "/",
+	},
+	{
+		label: "Dashboard",
 		icon: "mdi:account-box",
 		to: "/dashboard",
 	},
@@ -25,10 +30,7 @@ const src = data.value?.user?.image || "/default.png";
 <template>
 	<DropdownMenu>
 		<DropdownMenuTrigger v-if="loggedIn">
-			<NuxtImg
-				:src="src"
-				class="size-10 rounded-full border-2 border-secondary dark:border-primary"
-			/>
+			<NuxtImg :src="src" class="size-10 rounded-md" />
 		</DropdownMenuTrigger>
 
 		<DropdownMenuTrigger
@@ -38,7 +40,7 @@ const src = data.value?.user?.image || "/default.png";
 			<Icon name="mdi:user" />
 		</DropdownMenuTrigger>
 
-		<DropdownMenuContent>
+		<DropdownMenuContent class="w-60">
 			<DropdownMenuLabel>My Account</DropdownMenuLabel>
 
 			<DropdownMenuSeparator />
