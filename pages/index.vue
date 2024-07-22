@@ -3,7 +3,7 @@ definePageMeta({
 	auth: false,
 });
 
-const { notes, createNote, deleteNote } = useNotes();
+const { notes, deleteNote, createNote } = useNotes();
 </script>
 
 <template>
@@ -12,9 +12,7 @@ const { notes, createNote, deleteNote } = useNotes();
 		<Icon name="uil:github" />
 		<template v-if="notes">
 			<div v-for="note in notes">
-				<button
-					@click="async () => await deleteNote({ noteId: note.id })"
-				>
+				<button @click="deleteNote({ noteId: note.id })">
 					{{ note.id }}
 				</button>
 			</div>

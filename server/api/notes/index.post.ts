@@ -1,18 +1,19 @@
 import { H3Event } from "h3";
 import { prisma } from "~/lib/prisma";
 import { Note } from "~/lib/definitions";
+import { getServerSession } from "#auth";
 
 export default defineEventHandler(async (event: H3Event): Promise<Note> => {
-	const { userId } = getRouterParams(event);
+	const session = await getServerSession(event);
 
-	if (!userId)
+	if (!session)
 		throw createError({
-			statusCode: 400,
-			statusMessage: "RouteParam :userId is missing",
+			statusCode: 401,
+			statusMessage: "Unauthorized!",
 		});
 
 	const user = await prisma.user.findUnique({
-		where: { id: userId },
+		where: { id: session.user.id },
 	});
 
 	if (!user)
