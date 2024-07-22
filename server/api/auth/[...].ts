@@ -16,4 +16,10 @@ export default NuxtAuthHandler({
 			clientSecret: GITHUB_CLIENT_SECRET,
 		}),
 	],
+	callbacks: {
+		session: ({ session, user }) => {
+			session.user.id = user.id;
+			return session;
+		},
+	},
 });
