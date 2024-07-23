@@ -25,7 +25,8 @@ export default defineEventHandler(async (event: H3Event): Promise<Note> => {
 	const note = await prisma.note.create({
 		data: {
 			title: "This is the note title",
-			content: "Write your content here ...",
+			content:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore eius itaque, eligendi porro quaerat iure. Cumque culpa nobis ipsam mollitia tenetur dolores. Non reiciendis laborum, delectus nihil iure maiores officia!",
 			userId: user.id,
 		},
 	});
