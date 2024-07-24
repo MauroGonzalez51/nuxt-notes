@@ -24,7 +24,12 @@ export default defineEventHandler(
 			});
 
 		const { noteId } = getQuery(event);
-		if (!noteId) return await prisma.note.findMany();
+		if (!noteId)
+			return await prisma.note.findMany({
+				orderBy: {
+					createdAt: "desc",
+				},
+			});
 
 		const note = await prisma.note.findUnique({
 			where: { id: noteId.toString() },

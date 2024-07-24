@@ -1,6 +1,6 @@
 import type { Note } from "@/lib/definitions";
 
-export default function () {
+export default function (limit: number = 5) {
 	const { data: notes } = useFetch<Note[]>("/api/notes", {
 		key: "notes",
 	});
@@ -28,8 +28,11 @@ export default function () {
 		return response;
 	}
 
+	const latestNotes = computed(() => notes.value?.slice(0, Math.abs(limit)));
+
 	return {
 		notes,
+		latestNotes,
 		createNote,
 		deleteNote,
 	};
