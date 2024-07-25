@@ -27,6 +27,29 @@ const slicedNotes = computed(() =>
 	notes.value?.slice(startIndex.value, endIndex.value),
 );
 
+const paginationItems = computed(() => {
+	const items = [];
+	const maxVisiblePages = 3;
+
+	for (let i = 1; i <= totalPages.value; i++) {
+		if (
+			i === 1 ||
+			i === totalPages.value ||
+			(i >= currentPage.value - Math.floor(maxVisiblePages / 2) &&
+				i <= currentPage.value + Math.floor(maxVisiblePages / 2))
+		) {
+			items.push({ type: "page", value: i });
+		} else if (
+			items[items.length - 1]?.type !== "ellipsis" &&
+			items[items.length - 1]?.value !== i - 1
+		) {
+			items.push({ type: "ellipsis", value: "..." });
+		}
+	}
+
+	return items;
+});
+
 const handlePageChange = (page: number) => {
 	if (page > 0 && page <= totalPages.value) {
 		currentPage.value = page;
@@ -47,34 +70,33 @@ const handlePageChange = (page: number) => {
 	</div>
 	<div>
 		<Pagination
-			v-slot="{ page }"
 			:total="totalPages"
 			:itemsPerPage="itemsPerPage"
 			:onUpdate:page="(value) => handlePageChange(value)"
 		>
-			<PaginationList v-slot="{ items }" class="flex items-center">
+			<PaginationList class="flex items-center">
 				<PaginationFirst :disabled="currentPage === 1" />
 				<PaginationPrev :disabled="currentPage === 1" />
 
-				<template v-for="(item, index) in items">
+				<template v-for="(item, index) in paginationItems" :key="index">
 					<PaginationListItem
 						v-if="item.type === 'page'"
-						:key="index"
-						:value="item.value"
+						:value="Number(item.value)"
 						as-child
 					>
 						<Button
 							class="w-10 h-10 p-0"
 							:variant="
-								item.value === page ? 'default' : 'outline'
+								item.value === currentPage
+									? 'default'
+									: 'outline'
 							"
 						>
 							{{ item.value }}
 						</Button>
 					</PaginationListItem>
 					<PaginationEllipsis
-						v-else
-						:key="item.type"
+						v-else-if="item.type === 'ellipsis'"
 						:index="index"
 					/>
 				</template>
