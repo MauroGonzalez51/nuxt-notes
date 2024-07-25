@@ -14,7 +14,9 @@ const { latestNotes } = useNotes();
 			<h1>Recent notes</h1>
 			<div>
 				<Button variant="link" class="px-0">
-					<NuxtLink to="/notes"> All notes </NuxtLink>
+					<NuxtLink :to="{ path: '/notes', query: { page: 1 } }">
+						All notes
+					</NuxtLink>
 				</Button>
 			</div>
 		</div>

@@ -11,17 +11,21 @@ definePageMeta({
 	middleware: ["auth"],
 });
 
+const { data: session } = useAuth();
 const { notes } = useNotes();
+const router = useRouter();
+const route = useRoute();
 
 const itemsPerPage = 8;
-const currentPage = ref<number>(1);
-
 const totalPages = computed(() =>
 	Math.ceil((notes.value?.length || 1) / itemsPerPage),
 );
 
-const startIndex = computed(() => (currentPage.value - 1) * itemsPerPage);
-const endIndex = computed(() => startIndex.value + itemsPerPage);
+const currentPage = computed<number>(() => Number(route.query.page) || 1);
+const startIndex = computed<number>(
+	() => (currentPage.value - 1) * itemsPerPage,
+);
+const endIndex = computed<number>(() => startIndex.value + itemsPerPage);
 
 const slicedNotes = computed(() =>
 	notes.value?.slice(startIndex.value, endIndex.value),
@@ -52,12 +56,28 @@ const paginationItems = computed(() => {
 
 const handlePageChange = (page: number) => {
 	if (page > 0 && page <= totalPages.value) {
-		currentPage.value = page;
+		router.push({
+			path: route.path,
+			query: {
+				page,
+			},
+		});
 	}
 };
 </script>
 
 <template>
+	<Head>
+		<Title v-if="session?.user.name">
+			Notes of {{ session.user.name }}
+		</Title>
+		<Title v-else> Notes | Page {{ currentPage }}/{{ totalPages }} </Title>
+		<Meta
+			name="description"
+			content="Page where users can see all of his stored notes"
+		/>
+	</Head>
+
 	<div class="flex justify-between items-center">
 		<h1 class="font-semibold text-lg">All notes</h1>
 		<Button @click="handleCreateNote"> New Note </Button>
@@ -65,7 +85,7 @@ const handlePageChange = (page: number) => {
 
 	<div
 		v-if="notes"
-		class="mt-4 flex flex-col gap-4 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 "
+		class="mt-4 flex flex-col gap-4 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
 	>
 		<HomeNoteCard v-for="note in slicedNotes" :note="note" />
 	</div>
