@@ -59,8 +59,10 @@ const formattedDate = new Date(note.createdAt).toLocaleDateString("en-Es", {
 			</div>
 
 			<Button variant="outline" size="sm" class="">
-				<Icon name="mdi:file-edit-outline" class="mr-2 h-4 w-4" />
-				Edit
+				<NuxtLink class="w-full h-full inline-flex items-center" :to="{ path: '/edit', query: { noteId: note.id } }">
+					<Icon name="mdi:file-edit-outline" class="mr-2 h-4 w-4" />
+					Edit
+				</NuxtLink>
 			</Button>
 		</CardFooter>
 

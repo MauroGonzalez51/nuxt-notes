@@ -20,7 +20,7 @@ const { latestNotes } = useNotes();
 				</Button>
 			</div>
 		</div>
-		<Carousel class="w-full relative outline-none">
+		<Carousel class="w-full mt-2 relative outline-none">
 			<CarouselContent class="">
 				<CarouselItem
 					v-for="note in latestNotes"
