@@ -58,52 +58,59 @@ const handlePageChange = (page: number) => {
 </script>
 
 <template>
-	<div class="flex justify-between">
-		<h1 class="font-semibold text-lg">
-			All notes | Total Count: {{ notes?.length }} | currentPage:
-			{{ currentPage }} / Total Pages: {{ totalPages }}
-		</h1>
+	<div class="flex justify-between items-center">
+		<h1 class="font-semibold text-lg">All notes</h1>
 		<Button @click="handleCreateNote"> New Note </Button>
 	</div>
-	<div v-if="notes" class="mt-4 w-full grid grid-cols-4 gap-6">
-		<HomeNoteCard v-for="note in slicedNotes" :key="note.id" :note="note" />
-	</div>
-	<div>
-		<Pagination
-			:total="totalPages"
-			:itemsPerPage="itemsPerPage"
-			:onUpdate:page="(value) => handlePageChange(value)"
-		>
-			<PaginationList class="flex items-center">
-				<PaginationFirst :disabled="currentPage === 1" />
-				<PaginationPrev :disabled="currentPage === 1" />
 
-				<template v-for="(item, index) in paginationItems" :key="index">
-					<PaginationListItem
-						v-if="item.type === 'page'"
-						:value="Number(item.value)"
-						as-child
+	<div
+		v-if="notes"
+		class="mt-4 flex flex-col gap-4 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 "
+	>
+		<HomeNoteCard v-for="note in slicedNotes" :note="note" />
+	</div>
+
+	<Pagination class="mt-4">
+		<PaginationList class="flex items-center">
+			<PaginationFirst
+				:disabled="currentPage === 1"
+				@click="handlePageChange(1)"
+			/>
+			<PaginationPrev
+				:disabled="currentPage === 1"
+				@click="handlePageChange(currentPage - 1)"
+			/>
+
+			<template v-for="(item, index) in paginationItems" :key="index">
+				<PaginationListItem
+					v-if="item.type === 'page'"
+					:value="Number(item.value)"
+					as-child
+				>
+					<Button
+						class="w-10 h-10 p-0"
+						:variant="
+							item.value === currentPage ? 'default' : 'outline'
+						"
+						@click="handlePageChange(Number(item.value))"
 					>
-						<Button
-							class="w-10 h-10 p-0"
-							:variant="
-								item.value === currentPage
-									? 'default'
-									: 'outline'
-							"
-						>
-							{{ item.value }}
-						</Button>
-					</PaginationListItem>
-					<PaginationEllipsis
-						v-else-if="item.type === 'ellipsis'"
-						:index="index"
-					/>
-				</template>
+						{{ item.value }}
+					</Button>
+				</PaginationListItem>
+				<PaginationEllipsis
+					v-else-if="item.type === 'ellipsis'"
+					:index="index"
+				/>
+			</template>
 
-				<PaginationNext :disabled="currentPage === totalPages" />
-				<PaginationLast :disabled="currentPage === totalPages" />
-			</PaginationList>
-		</Pagination>
-	</div>
+			<PaginationNext
+				:disabled="currentPage === totalPages"
+				@click="handlePageChange(currentPage + 1)"
+			/>
+			<PaginationLast
+				:disabled="currentPage === totalPages"
+				@click="handlePageChange(totalPages)"
+			/>
+		</PaginationList>
+	</Pagination>
 </template>

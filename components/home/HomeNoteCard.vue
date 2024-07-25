@@ -36,7 +36,7 @@ const formattedDate = new Date(note.createdAt).toLocaleDateString("en-Es", {
 </script>
 
 <template>
-	<Card class="max-w-md dark:bg-gray-800 relative">
+	<Card class="dark:bg-gray-800 relative overflow-hidden">
 		<CardHeader>
 			<CardTitle>
 				{{ note.title }}
