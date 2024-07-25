@@ -9,12 +9,12 @@ const { latestNotes } = useNotes();
 </script>
 
 <template>
-	<div class="px-10 w-full">
-		<div class="font-semibold text-lg my-4 items-center">
+	<div class="w-full">
+		<div class="font-semibold text-lg items-center">
 			<h1>Recent notes</h1>
 			<div>
 				<Button variant="link" class="px-0">
-					All notes
+					<NuxtLink to="/notes"> All notes </NuxtLink>
 				</Button>
 			</div>
 		</div>

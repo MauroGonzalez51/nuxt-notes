@@ -23,7 +23,7 @@ function handleCreateNote(_event: Event) {
 </script>
 
 <template>
-	<div class="flex justify-between w-full mt-4">
+	<div class="flex justify-between mt-4">
 		<Button @click="handleCreateNote"> New Note </Button>
 
 		<div>
