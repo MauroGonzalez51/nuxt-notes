@@ -7,9 +7,7 @@ const { latestNotes } = useNotes();
 </script>
 
 <template>
-	<LayoutContent>
-		<div v-if="latestNotes" class="flex gap-4 flex-wrap">
-				<HomeRecentNotes />
-			</div>
-	</LayoutContent>
+	<div v-if="latestNotes" class="flex gap-4 flex-wrap">
+		<HomeRecentNotes />
+	</div>
 </template>

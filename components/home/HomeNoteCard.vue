@@ -19,7 +19,6 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { useToast } from "@/components/ui/toast";
 
 interface Props {
 	note: Note;
@@ -27,30 +26,13 @@ interface Props {
 
 const { note } = defineProps<Props>();
 
-const { deleteNote } = useNotes();
 const { data: session } = useAuth();
-const { toast } = useToast();
 
 const formattedDate = new Date(note.createdAt).toLocaleDateString("en-Es", {
 	year: "numeric",
 	month: "long",
 	day: "numeric",
 });
-
-function handleDeleteNote(_event: Event) {
-	deleteNote({ noteId: note.id })
-		.then(() => {
-			toast({
-				title: "Note were deleted succesfully",
-			});
-		})
-		.catch(() => {
-			toast({
-				title: "An error ocurred while deleting the note",
-				description: "Please try again after some time",
-			});
-		});
-}
 </script>
 
 <template>
@@ -102,7 +84,8 @@ function handleDeleteNote(_event: Event) {
 					</AlertDialogHeader>
 					<AlertDialogFooter>
 						<AlertDialogCancel>Cancel</AlertDialogCancel>
-						<AlertDialogAction @click="handleDeleteNote"
+						<AlertDialogAction
+							@click="() => handleDeleteNote({ noteId: note.id })"
 							>Continue</AlertDialogAction
 						>
 					</AlertDialogFooter>

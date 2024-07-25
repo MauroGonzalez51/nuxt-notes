@@ -10,7 +10,7 @@ const { latestNotes } = useNotes();
 
 <template>
 	<div class="w-full">
-		<div class="font-semibold text-lg items-center">
+		<div class="font-semibold text-lg">
 			<h1>Recent notes</h1>
 			<div>
 				<Button variant="link" class="px-0">
@@ -18,7 +18,7 @@ const { latestNotes } = useNotes();
 				</Button>
 			</div>
 		</div>
-		<Carousel class="w-full relative">
+		<Carousel class="w-full relative outline-none">
 			<CarouselContent class="">
 				<CarouselItem
 					v-for="note in latestNotes"
