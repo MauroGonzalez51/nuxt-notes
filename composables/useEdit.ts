@@ -25,7 +25,17 @@ export default function () {
 
 	const autoSave = useState<boolean>("autoSave", () => true);
 
-	function saveNote(): void {}
+	async function saveNote(): Promise<Note> {
+		const response = await $fetch<Note>("/api/notes", {
+			method: "PUT",
+			body: note.value,
+			query: {
+				noteId,
+			},
+		});
+
+		return response;
+	}
 
 	onMounted(() => {
 		watch(

@@ -8,7 +8,7 @@ const { autoSave } = useEdit();
 	<div class="flex items-center space-x-2 text-sm">
 		<Switch
 			:defaultChecked="autoSave"
-			@update:checked="(value) => (autoSave = value)"
+			@update:checked="(payload: boolean) => (autoSave = payload)"
 			id="autoSave"
 		/>
 		<label for="autoSave">Auto Save</label>

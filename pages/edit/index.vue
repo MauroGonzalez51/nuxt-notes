@@ -18,6 +18,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 
 const { note } = useEdit();
+
+// TODO: use onBeforeRouteLeave to trigger the last save
 </script>
 
 <template>
@@ -38,7 +40,7 @@ const { note } = useEdit();
 			class="max-w-md shadow"
 			placeholder="Note title ..."
 			@update:modelValue="
-				(payload) => {
+				(payload: string | number) => {
 					if (!note?.title) return;
 					note.title = payload.toString();
 				}

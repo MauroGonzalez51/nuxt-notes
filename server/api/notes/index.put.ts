@@ -32,6 +32,13 @@ export default defineEventHandler(async (event: H3Event): Promise<Note> => {
 
 	const data: Partial<Omit<Note, "id">> = await readBody(event);
 
+	if (!data)
+		throw createError({
+			statusCode: 400,
+			statusMessage:
+				"Body should be of type { Note }, cannot be null or undefined",
+		});
+
 	return await prisma.note.update({
 		where: { id: note.id },
 		data,
