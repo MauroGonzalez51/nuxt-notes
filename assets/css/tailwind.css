@@ -73,6 +73,6 @@
     @apply border-border font-inter box-border;
   }
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply bg-background min-h-screen text-foreground;
   }
 }
