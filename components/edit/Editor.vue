@@ -3,12 +3,16 @@ import { Input } from "@/components/ui/input";
 import {
 	Select,
 	SelectContent,
-	SelectGroup,
 	SelectItem,
-	SelectLabel,
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const { editor, note } = useEdit();
 
@@ -17,6 +21,7 @@ interface ButtonAction {
 	action: () => unknown;
 	disabled: () => boolean;
 	active: () => boolean;
+	tooltip: string;
 }
 
 interface SelectAction {
@@ -31,6 +36,7 @@ const basicButtons: ButtonAction[] = [
 		action: () => editor.value?.chain().focus().toggleBold().run(),
 		disabled: () => !editor.value?.can().chain().focus().toggleBold().run(),
 		active: () => editor.value?.isActive("bold") || false,
+		tooltip: "Bold",
 	},
 	{
 		icon: "ic:baseline-format-italic",
@@ -38,13 +44,7 @@ const basicButtons: ButtonAction[] = [
 		disabled: () =>
 			!editor.value?.can().chain().focus().toggleItalic().run(),
 		active: () => editor.value?.isActive("italic") || false,
-	},
-	{
-		icon: "ic:baseline-format-strikethrough",
-		action: () => editor.value?.chain().focus().toggleStrike().run(),
-		disabled: () =>
-			!editor.value?.can().chain().focus().toggleStrike().run(),
-		active: () => editor.value?.isActive("strike") || false,
+		tooltip: "Italic",
 	},
 	{
 		icon: "ic:baseline-format-underlined",
@@ -52,6 +52,15 @@ const basicButtons: ButtonAction[] = [
 		disabled: () =>
 			!editor.value?.can().chain().focus().toggleUnderline().run(),
 		active: () => editor.value?.isActive("underline") || false,
+		tooltip: "Underline",
+	},
+	{
+		icon: "ic:baseline-format-strikethrough",
+		action: () => editor.value?.chain().focus().toggleStrike().run(),
+		disabled: () =>
+			!editor.value?.can().chain().focus().toggleStrike().run(),
+		active: () => editor.value?.isActive("strike") || false,
+		tooltip: "Strike",
 	},
 ];
 
@@ -85,16 +94,24 @@ const fontFamily: SelectAction[] = [
 			v-if="editor"
 			class="border border-primary/10 p-4 rounded-md shadow flex gap-4"
 		>
-			<Button
-				v-for="button in basicButtons"
-				@click="button.action"
-				:class="{ 'is-active': button.active }"
-				:disabled="!button.disabled"
-				variant="outline"
-				size="sm"
-			>
-				<Icon :name="button.icon" />
-			</Button>
+			<TooltipProvider v-for="button in basicButtons">
+				<Tooltip>
+					<TooltipTrigger>
+						<Button
+							@click="button.action"
+							:class="{ 'is-active': button.active }"
+							:disabled="!button.disabled"
+							variant="outline"
+							size="sm"
+						>
+							<Icon :name="button.icon" />
+						</Button>
+					</TooltipTrigger>
+					<TooltipContent>
+						<p>{{ button.tooltip }}</p>
+					</TooltipContent>
+				</Tooltip>
+			</TooltipProvider>
 
 			<Select
 				:onUpdate:modelValue="
