@@ -1,4 +1,6 @@
-import Underline from "@tiptap/extension-underline";
+import TipTapUnderline from "@tiptap/extension-underline";
+import TipTapFontFamily from "@tiptap/extension-font-family";
+import TipTapTextStyle from "@tiptap/extension-text-style";
 
 const extensions = [
 	/**
@@ -25,10 +27,14 @@ const extensions = [
 	 * * History
 	 *
 	 * * Underline ✔️
+	 * * FontFamily
+	 * * TextStyle
 	 *
 	 */
 	TipTapStarterKit.configure({}),
-	Underline,
+	TipTapUnderline,
+	TipTapFontFamily,
+	TipTapTextStyle,
 ];
 
 export { extensions };

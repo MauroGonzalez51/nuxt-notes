@@ -1,5 +1,14 @@
 <script setup lang="ts">
 import { Input } from "@/components/ui/input";
+import {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectLabel,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 
 const { editor, note } = useEdit();
 
@@ -10,7 +19,13 @@ interface ButtonAction {
 	active: () => boolean;
 }
 
-const buttons: ButtonAction[] = [
+interface SelectAction {
+	label?: string;
+	icon?: string;
+	value: string;
+}
+
+const basicButtons: ButtonAction[] = [
 	{
 		icon: "ic:baseline-format-bold",
 		action: () => editor.value?.chain().focus().toggleBold().run(),
@@ -39,6 +54,29 @@ const buttons: ButtonAction[] = [
 		active: () => editor.value?.isActive("underline") || false,
 	},
 ];
+
+const fontFamily: SelectAction[] = [
+	{
+		label: "Inter",
+		value: "Inter",
+	},
+	{
+		label: "Comic Sans",
+		value: "Comic Sans MS, Comic Sans",
+	},
+	{
+		label: "Serif",
+		value: "serif",
+	},
+	{
+		label: "Monospace",
+		value: "monospace",
+	},
+	{
+		label: "Cursive",
+		value: "cursive",
+	},
+];
 </script>
 
 <template>
@@ -48,7 +86,7 @@ const buttons: ButtonAction[] = [
 			class="border border-primary/10 p-4 rounded-md shadow flex gap-4"
 		>
 			<Button
-				v-for="button in buttons"
+				v-for="button in basicButtons"
 				@click="button.action"
 				:class="{ 'is-active': button.active }"
 				:disabled="!button.disabled"
@@ -57,6 +95,22 @@ const buttons: ButtonAction[] = [
 			>
 				<Icon :name="button.icon" />
 			</Button>
+
+			<Select
+				:onUpdate:modelValue="
+					(payload) =>
+						editor?.chain().focus().setFontFamily(payload).run()
+				"
+			>
+				<SelectTrigger class="w-48">
+					<SelectValue placeholder="Font" />
+				</SelectTrigger>
+				<SelectContent>
+					<SelectItem v-for="item in fontFamily" :value="item.value">
+						{{ item.label }}
+					</SelectItem>
+				</SelectContent>
+			</Select>
 
 			<EditAutoSave />
 		</div>
