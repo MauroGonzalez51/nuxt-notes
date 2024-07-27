@@ -118,6 +118,7 @@ const fontFamily: SelectAction[] = [
 					(payload) =>
 						editor?.chain().focus().setFontFamily(payload).run()
 				"
+				:defaultValue="fontFamily[0].value"
 			>
 				<SelectTrigger class="w-48">
 					<SelectValue placeholder="Font" />
