@@ -2,6 +2,37 @@
 import { Input } from "@/components/ui/input";
 
 const { editor, note } = useEdit();
+
+interface ButtonAction {
+	icon: string;
+	action: () => unknown;
+	disabled: () => boolean;
+	active: () => boolean;
+}
+
+const buttons: ButtonAction[] = [
+	{
+		icon: "ic:baseline-format-bold",
+		action: () => editor.value?.chain().focus().toggleBold().run(),
+		disabled: () =>
+			!editor.value?.can().chain().focus().toggleBold().run(),
+		active: () => editor.value?.isActive("bold") || false,
+	},
+	{
+		icon: "ic:baseline-format-italic",
+		action: () => editor.value?.chain().focus().toggleItalic().run(),
+		disabled: () =>
+			!editor.value?.can().chain().focus().toggleItalic().run(),
+		active: () => editor.value?.isActive("italic") || false,
+	},
+	{
+		icon: "ic:baseline-format-strikethrough",
+		action: () => editor.value?.chain().focus().toggleStrike().run(),
+		disabled: () =>
+			!editor.value?.can().chain().focus().toggleStrike().run(),
+		active: () => editor.value?.isActive("strike") || false,
+	},
+];
 </script>
 
 <template>
@@ -11,33 +42,14 @@ const { editor, note } = useEdit();
 			class="border border-primary/10 p-4 rounded-md shadow flex gap-4"
 		>
 			<Button
-				@click="editor.chain().focus().toggleBold().run()"
-				:disabled="!editor.can().chain().focus().toggleBold().run()"
-				:class="{ 'is-active': editor.isActive('bold') }"
+				v-for="button in buttons"
+				@click="button.action"
+				:class="{ 'is-active': button.active }"
+				:disabled="!button.disabled"
 				variant="outline"
 				size="sm"
 			>
-				<Icon name="ic:baseline-format-bold" />
-			</Button>
-
-			<Button
-				@click="editor.chain().focus().toggleItalic().run()"
-				:disabled="!editor.can().chain().focus().toggleItalic().run()"
-				:class="{ 'is-active': editor.isActive('italic') }"
-				variant="outline"
-				size="sm"
-			>
-				<Icon name="ic:baseline-format-italic" />
-			</Button>
-
-			<Button
-				@click="editor.chain().focus().toggleStrike().run()"
-				:disabled="!editor.can().chain().focus().toggleStrike().run()"
-				:class="{ 'is-active': editor.isActive('strike') }"
-				variant="outline"
-				size="sm"
-			>
-				<Icon name="ic:baseline-format-strikethrough" />
+				<Icon :name="button.icon" />
 			</Button>
 
 			<EditAutoSave />
