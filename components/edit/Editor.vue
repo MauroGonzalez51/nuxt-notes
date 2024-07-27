@@ -1,24 +1,40 @@
 <script setup lang="ts">
-const editor = useEditor({
-	content: "<p>I'm running Tiptap with Vue.js. 🎉</p>",
-	extensions: [TipTapStarterKit],
-});
+import { Input } from "@/components/ui/input";
 
-onBeforeUnmount(() => {
-	unref(editor)?.destroy();
-});
+const { editor, note } = useEdit();
 </script>
 
 <template>
 	<div>
-		<div v-if="editor">
-			<button
+		<div
+			v-if="editor"
+			class="border border-primary/10 p-4 rounded-md shadow flex gap-4"
+		>
+			<Button
 				@click="editor.chain().focus().toggleBold().run()"
 				:disabled="!editor.can().chain().focus().toggleBold().run()"
 				:class="{ 'is-active': editor.isActive('bold') }"
+                variant="outline"
+                size="sm"
 			>
-				bold
-			</button>
+				<Icon name="ic:baseline-format-bold" />
+			</Button>
+
+			<EditAutoSave />
+		</div>
+
+		<Input
+			v-if="note"
+			:defaultValue="note.title"
+			class="max-w-md shadow"
+			placeholder="Note title ..."
+			@update:modelValue="(payload: string | number) => {
+				if (!note) return;
+				note.title = payload?.toString();
+			}"
+		/>
+
+		<div v-if="editor" class="flex gap-4 bg-red-500">
 			<button
 				@click="editor.chain().focus().toggleItalic().run()"
 				:disabled="!editor.can().chain().focus().toggleItalic().run()"

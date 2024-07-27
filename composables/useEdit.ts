@@ -24,7 +24,18 @@ export default function () {
 	});
 
 	const autoSave = useState<boolean>("autoSave", () => false);
-
+	const editor = useEditor({
+		extensions: [TipTapStarterKit],
+		editorProps: {
+			attributes: {
+				class: 'p-4 border border-primary/10 dark:border-primary/50 rounded-md shadow focus:outline-2 focus:outline-primary'
+			}
+		},
+		onUpdate: ({ editor }) => {
+			if (!note.value) return;
+			note.value.content = editor.getHTML();
+		},
+	});
 
 	/**
 	 * ! Endpoint: PUT /api/notes
@@ -58,8 +69,7 @@ export default function () {
 	onMounted(() => {
 		if (!note.value?.content) return;
 
-		// TODO
-		// editor.value?.commands.setContent(note.value?.content);
+		editor.value?.commands.setContent(note.value?.content);
 	});
 
 	/**
@@ -85,11 +95,16 @@ export default function () {
 		);
 	});
 
+	onBeforeUnmount(() => {
+		unref(editor)?.destroy();
+	});
+
 	return {
 		note,
 		error,
 		refresh,
 		autoSave,
 		saveNote,
+		editor,
 	};
 }
