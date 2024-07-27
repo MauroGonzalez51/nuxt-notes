@@ -10,7 +10,6 @@ export default defineNuxtConfig({
 		"@sidebase/nuxt-auth",
 		"@nuxt/image",
 		"@nuxtjs/color-mode",
-		"nuxt-tiptap-editor",
 	],
 	runtimeConfig: {
 		AUTH_SECRET: process.env.AUTH_SECRET,
@@ -27,8 +26,5 @@ export default defineNuxtConfig({
 	auth: {
 		isEnabled: true,
 		globalAppMiddleware: true,
-	},
-	tiptap: {
-		prefix: "TipTap",
 	},
 });

@@ -16,17 +16,7 @@ import { Input } from "@/components/ui/input";
 
 const { data: session } = useAuth();
 
-const { note, editor } = useEdit();
-
-const toggleBold = () => {
-	if (!editor.value) return;
-	editor.value.chain().focus().toggleBold().run();
-};
-
-const toggleItalic = () => {
-	if (!editor.value) return;
-	editor.value.chain().focus().toggleItalic().run();
-};
+const { note } = useEdit();
 </script>
 
 <template>
@@ -40,7 +30,6 @@ const toggleItalic = () => {
 		</Head>
 
 		<div
-			v-if="editor"
 			class="border border-primary/10 p-4 rounded-md shadow flex gap-4"
 		>
 			<EditAutoSave />
@@ -55,7 +44,7 @@ const toggleItalic = () => {
 			}"
 		/>
 		<ClientOnly>
-			<TipTapEditorContent :editor="editor" />
+			<!-- TODO -->
 		</ClientOnly>
 	</div>
 </template>

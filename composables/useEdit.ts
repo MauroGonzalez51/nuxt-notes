@@ -1,7 +1,4 @@
 import type { Note } from "@/lib/definitions";
-import { useEditor } from "@tiptap/vue-3";
-import { extensions } from "@/lib/tiptap";
-import type { TipTapEditor } from "#imports";
 
 const DEFAULT_AUTOSAVE_SECONDS: number = 10;
 
@@ -28,18 +25,6 @@ export default function () {
 
 	const autoSave = useState<boolean>("autoSave", () => false);
 
-	const editor = ref(useEditor({
-		extensions,
-		editorProps: {
-			attributes: {
-				class: "p-4 border border-primary/10 rounded-md shadow focus:outline-2 focus:outline-prima",
-			},
-		},
-		onUpdate: ({ editor }) => {
-			if (!note.value) return;
-			note.value.content = editor.getHTML();
-		},
-	}));
 
 	/**
 	 * ! Endpoint: PUT /api/notes
@@ -73,7 +58,8 @@ export default function () {
 	onMounted(() => {
 		if (!note.value?.content) return;
 
-		editor.value?.commands.setContent(note.value?.content);
+		// TODO
+		// editor.value?.commands.setContent(note.value?.content);
 	});
 
 	/**
@@ -99,17 +85,11 @@ export default function () {
 		);
 	});
 
-	onBeforeUnmount(() => {
-		saveNote();
-		unref(editor)?.destroy();
-	});
-
 	return {
 		note,
 		error,
 		refresh,
 		autoSave,
 		saveNote,
-		editor,
 	};
 }
