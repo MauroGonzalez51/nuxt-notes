@@ -24,7 +24,9 @@ onBeforeRouteLeave((_from, _to, next) => {
 		.then(() => console.log("Noted saved succesfully"))
 		.catch((error) => console.error(error));
 
-	next()
+	if (editor.value) editor.value.destroy();
+
+	next();
 });
 </script>
 

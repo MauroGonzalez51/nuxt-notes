@@ -31,7 +31,7 @@ export default function () {
 		extensions,
 		editorProps: {
 			attributes: {
-				class: "p-4 focus:outline-none border border-primary/10 rounded-md shadow",
+				class: "p-4 border border-primary/10 rounded-md shadow focus:outline-2 focus:outline-prima",
 			},
 		},
 		onUpdate: ({ editor }) => {
