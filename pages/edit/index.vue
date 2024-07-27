@@ -15,7 +15,6 @@ definePageMeta({
 import { Input } from "@/components/ui/input";
 
 const { data: session } = useAuth();
-
 const { note } = useEdit();
 </script>
 
@@ -29,9 +28,7 @@ const { note } = useEdit();
 			<Title v-else> Editing {{ note.title }} </Title>
 		</Head>
 
-		<div
-			class="border border-primary/10 p-4 rounded-md shadow flex gap-4"
-		>
+		<div class="border border-primary/10 p-4 rounded-md shadow flex gap-4">
 			<EditAutoSave />
 		</div>
 		<Input
@@ -44,7 +41,7 @@ const { note } = useEdit();
 			}"
 		/>
 		<ClientOnly>
-			<!-- TODO -->
+			<EditEditor />
 		</ClientOnly>
 	</div>
 </template>
