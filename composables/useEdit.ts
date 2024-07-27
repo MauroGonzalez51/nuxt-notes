@@ -1,4 +1,5 @@
 import type { Note } from "@/lib/definitions";
+import { extensions } from "@/lib/tiptap";
 
 const DEFAULT_AUTOSAVE_SECONDS: number = 10;
 
@@ -25,11 +26,11 @@ export default function () {
 
 	const autoSave = useState<boolean>("autoSave", () => false);
 	const editor = useEditor({
-		extensions: [TipTapStarterKit],
+		extensions,
 		editorProps: {
 			attributes: {
-				class: 'p-4 border border-primary/10 dark:border-primary/50 rounded-md shadow focus:outline-2 focus:outline-primary'
-			}
+				class: "p-4 border border-primary/10 dark:border-primary/50 rounded-md shadow focus:outline-2 focus:outline-primary",
+			},
 		},
 		onUpdate: ({ editor }) => {
 			if (!note.value) return;

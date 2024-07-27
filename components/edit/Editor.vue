@@ -14,8 +14,7 @@ const buttons: ButtonAction[] = [
 	{
 		icon: "ic:baseline-format-bold",
 		action: () => editor.value?.chain().focus().toggleBold().run(),
-		disabled: () =>
-			!editor.value?.can().chain().focus().toggleBold().run(),
+		disabled: () => !editor.value?.can().chain().focus().toggleBold().run(),
 		active: () => editor.value?.isActive("bold") || false,
 	},
 	{
@@ -31,6 +30,13 @@ const buttons: ButtonAction[] = [
 		disabled: () =>
 			!editor.value?.can().chain().focus().toggleStrike().run(),
 		active: () => editor.value?.isActive("strike") || false,
+	},
+	{
+		icon: "ic:baseline-format-underlined",
+		action: () => editor.value?.chain().focus().toggleUnderline().run(),
+		disabled: () =>
+			!editor.value?.can().chain().focus().toggleUnderline().run(),
+		active: () => editor.value?.isActive("underline") || false,
 	},
 ];
 </script>

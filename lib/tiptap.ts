@@ -1,3 +1,5 @@
+import Underline from "@tiptap/extension-underline";
+
 const extensions = [
 	/**
 	 * ! Included Extensions
@@ -13,20 +15,20 @@ const extensions = [
 	 * * Paragraph
 	 * * Text
 	 *
-	 * * Bold
+	 * * Bold ✔️
 	 * * Code
-	 * * Italic
-	 * * Strike
+	 * * Italic ✔️
+	 * * Strike ✔️
 	 *
 	 * * Dropcursor
 	 * * Gapcursor
 	 * * History
 	 *
+	 * * Underline ✔️
+	 *
 	 */
-	TipTapDocument,
-	TipTapParagraph,
-	TipTapText,
-	TipTapBold,
+	TipTapStarterKit.configure({}),
+	Underline,
 ];
 
 export { extensions };

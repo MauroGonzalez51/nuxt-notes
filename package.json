@@ -16,6 +16,7 @@
     "@nuxt/image": "^1.7.0",
     "@prisma/nuxt": "^0.0.30",
     "@sidebase/nuxt-auth": "^0.8.1",
+    "@tiptap/extension-underline": "^2.5.7",
     "@vueuse/core": "^10.11.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
