@@ -13,21 +13,20 @@ definePageMeta({
 });
 
 import { Input } from "@/components/ui/input";
-import { EditorContent } from "@tiptap/vue-3";
 
 const { data: session } = useAuth();
 
-const { note, saveNote, editor } = useEdit();
+const { note, editor } = useEdit();
 
-onBeforeRouteLeave((_from, _to, next) => {
-	saveNote()
-		.then(() => console.log("Noted saved succesfully"))
-		.catch((error) => console.error(error));
+const toggleBold = () => {
+	if (!editor.value) return;
+	editor.value.chain().focus().toggleBold().run();
+};
 
-	if (editor.value) editor.value.destroy();
-
-	next();
-});
+const toggleItalic = () => {
+	if (!editor.value) return;
+	editor.value.chain().focus().toggleItalic().run();
+};
 </script>
 
 <template>
@@ -40,20 +39,21 @@ onBeforeRouteLeave((_from, _to, next) => {
 			<Title v-else> Editing {{ note.title }} </Title>
 		</Head>
 
-		<div class="border border-primary/10 p-4 rounded-md shadow flex gap-4">
+		<div
+			v-if="editor"
+			class="border border-primary/10 p-4 rounded-md shadow flex gap-4"
+		>
 			<EditAutoSave />
 		</div>
 		<Input
 			:defaultValue="note.title"
 			class="max-w-md shadow"
 			placeholder="Note title ..."
-			@update:modelValue="
-				(payload: string | number) => {
-					if (!note?.title) return;
-					note.title = payload.toString();
-				}
-			"
+			@update:modelValue="(payload: string | number) => {
+				if (!note) return;
+				note.title = payload?.toString();
+			}"
 		/>
-		<EditorContent :editor="editor" />
+		<TipTapEditorContent :editor="editor" />
 	</div>
 </template>

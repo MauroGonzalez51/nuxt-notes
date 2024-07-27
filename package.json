@@ -25,6 +25,7 @@
     "embla-carousel-vue": "^8.1.7",
     "lucide-vue-next": "^0.408.0",
     "nuxt": "^3.12.3",
+    "nuxt-tiptap-editor": "^1.1.2",
     "radix-vue": "^1.9.1",
     "shadcn-nuxt": "^0.10.4",
     "tailwind-merge": "^2.4.0",
@@ -32,6 +33,9 @@
     "vue": "latest"
   },
   "devDependencies": {
+    "@iconify-json/ic": "^1.1.17",
+    "@iconify-json/material-symbols": "^1.1.85",
+    "@iconify-json/material-symbols-light": "^1.1.25",
     "@iconify-json/mdi": "^1.1.67",
     "@iconify-json/uil": "^1.1.8",
     "@nuxtjs/color-mode": "^3.4.2",
