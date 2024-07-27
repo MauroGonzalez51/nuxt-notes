@@ -14,10 +14,20 @@ const { editor, note } = useEdit();
 				@click="editor.chain().focus().toggleBold().run()"
 				:disabled="!editor.can().chain().focus().toggleBold().run()"
 				:class="{ 'is-active': editor.isActive('bold') }"
+				variant="outline"
+				size="sm"
+			>
+				<Icon name="ic:baseline-format-bold" />
+			</Button>
+
+			<Button
+				@click="editor.chain().focus().toggleItalic().run()"
+				:disabled="!editor.can().chain().focus().toggleItalic().run()"
+				:class="{ 'is-active': editor.isActive('italic') }"
                 variant="outline"
                 size="sm"
 			>
-				<Icon name="ic:baseline-format-bold" />
+				<Icon name="ic:baseline-format-italic" />
 			</Button>
 
 			<EditAutoSave />
