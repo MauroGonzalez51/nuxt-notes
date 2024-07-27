@@ -24,10 +24,20 @@ const { editor, note } = useEdit();
 				@click="editor.chain().focus().toggleItalic().run()"
 				:disabled="!editor.can().chain().focus().toggleItalic().run()"
 				:class="{ 'is-active': editor.isActive('italic') }"
-                variant="outline"
-                size="sm"
+				variant="outline"
+				size="sm"
 			>
 				<Icon name="ic:baseline-format-italic" />
+			</Button>
+
+			<Button
+				@click="editor.chain().focus().toggleStrike().run()"
+				:disabled="!editor.can().chain().focus().toggleStrike().run()"
+				:class="{ 'is-active': editor.isActive('strike') }"
+				variant="outline"
+				size="sm"
+			>
+				<Icon name="ic:baseline-format-strikethrough" />
 			</Button>
 
 			<EditAutoSave />
@@ -45,20 +55,6 @@ const { editor, note } = useEdit();
 		/>
 
 		<div v-if="editor" class="flex gap-4 bg-red-500">
-			<button
-				@click="editor.chain().focus().toggleItalic().run()"
-				:disabled="!editor.can().chain().focus().toggleItalic().run()"
-				:class="{ 'is-active': editor.isActive('italic') }"
-			>
-				italic
-			</button>
-			<button
-				@click="editor.chain().focus().toggleStrike().run()"
-				:disabled="!editor.can().chain().focus().toggleStrike().run()"
-				:class="{ 'is-active': editor.isActive('strike') }"
-			>
-				strike
-			</button>
 			<button
 				@click="editor.chain().focus().toggleCode().run()"
 				:disabled="!editor.can().chain().focus().toggleCode().run()"
