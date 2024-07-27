@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Switch } from "@/components/ui/switch";
 
-const { autoSave } = useEdit();
+const { autoSave, saveNote } = useEdit();
 </script>
 
 <template>
@@ -13,4 +13,6 @@ const { autoSave } = useEdit();
 		/>
 		<label for="autoSave">Auto Save</label>
 	</div>
+
+	<Button variant="outline" @click="saveNote()">Save Now</Button>
 </template>

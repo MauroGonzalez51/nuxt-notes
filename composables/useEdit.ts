@@ -1,4 +1,6 @@
 import type { Note } from "@/lib/definitions";
+import { useEditor } from "@tiptap/vue-3";
+import { extensions } from "@/lib/tiptap";
 
 const DEFAULT_AUTOSAVE_SECONDS: number = 10;
 
@@ -23,20 +25,63 @@ export default function () {
 		watch: [noteId],
 	});
 
-	const autoSave = useState<boolean>("autoSave", () => true);
+	const autoSave = useState<boolean>("autoSave", () => false);
 
-	async function saveNote(): Promise<Note> {
+	const editor = useEditor({
+		extensions,
+		editorProps: {
+			attributes: {
+				class: "p-4 focus:outline-none border border-primary/10 rounded-md shadow",
+			},
+		},
+		onUpdate: ({ editor }) => {
+			if (!note.value) return;
+			note.value.content = editor.getHTML();
+		},
+	});
+
+	/**
+	 * ! Endpoint: PUT /api/notes
+	 * @brief Using the endpoint to save the current state of the note
+	 * @returns {Note | undefined}
+	 */
+	async function saveNote(): Promise<Note | undefined> {
+		if (!note.value) return;
+
+		const body: Partial<Omit<Note, "id">> = {
+			title: note.value.title,
+			content: note.value.content,
+		};
+
 		const response = await $fetch<Note>("/api/notes", {
 			method: "PUT",
-			body: note.value,
+			body: toRaw(body),
 			query: {
-				noteId,
+				noteId: noteId.value,
 			},
 		});
 
 		return response;
 	}
 
+	/**
+	 * ! Event: onMounted
+	 * Setting the initial content of the editor
+	 * if the gathered note has some inside of it
+	 */
+	onMounted(() => {
+		if (!note.value?.content) return;
+
+		editor.value?.commands.setContent(note.value?.content);
+	});
+
+	/**
+	 * ! Event: onMounted
+	 * Creating an event listener for the 'autoSave' flag
+	 * Every time it changes gotta check if it's true, then the
+	 * interval should be running, but whenever it changes
+	 * it should run a cleanup function to stop that interval
+	 */
 	onMounted(() => {
 		watch(
 			autoSave,
@@ -59,5 +104,6 @@ export default function () {
 		refresh,
 		autoSave,
 		saveNote,
+		editor,
 	};
 }

@@ -4,13 +4,13 @@ import { Note } from "~/lib/definitions";
 import { getServerSession } from "#auth";
 
 export default defineEventHandler(async (event: H3Event): Promise<Note> => {
-	const session = await getServerSession(event);
+	// const session = await getServerSession(event);
 
-	if (!session)
-		throw createError({
-			statusCode: 401,
-			statusMessage: "Unauthorized!",
-		});
+	// if (!session)
+	// 	throw createError({
+	// 		statusCode: 401,
+	// 		statusMessage: "Unauthorized!",
+	// 	});
 
 	const { noteId } = getQuery(event);
 

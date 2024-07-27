@@ -12,14 +12,20 @@ definePageMeta({
 	],
 });
 
+import { Input } from "@/components/ui/input";
+import { EditorContent } from "@tiptap/vue-3";
+
 const { data: session } = useAuth();
 
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
+const { note, saveNote, editor } = useEdit();
 
-const { note } = useEdit();
+onBeforeRouteLeave((_from, _to, next) => {
+	saveNote()
+		.then(() => console.log("Noted saved succesfully"))
+		.catch((error) => console.error(error));
 
-// TODO: use onBeforeRouteLeave to trigger the last save
+	next()
+});
 </script>
 
 <template>
@@ -32,7 +38,7 @@ const { note } = useEdit();
 			<Title v-else> Editing {{ note.title }} </Title>
 		</Head>
 
-		<div class="border border-primary/10 p-4 rounded-md shadow">
+		<div class="border border-primary/10 p-4 rounded-md shadow flex gap-4">
 			<EditAutoSave />
 		</div>
 		<Input
@@ -46,10 +52,6 @@ const { note } = useEdit();
 				}
 			"
 		/>
-		<Textarea
-			:defaultValue="note.content"
-			placeholder="Write your content here ..."
-			class="shadow"
-		/>
+		<EditorContent :editor="editor" />
 	</div>
 </template>
