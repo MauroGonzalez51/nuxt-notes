@@ -54,6 +54,8 @@ const toggleItalic = () => {
 				note.title = payload?.toString();
 			}"
 		/>
-		<TipTapEditorContent :editor="editor" />
+		<ClientOnly>
+			<TipTapEditorContent :editor="editor" />
+		</ClientOnly>
 	</div>
 </template>
