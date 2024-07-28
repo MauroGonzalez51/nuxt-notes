@@ -6,8 +6,9 @@ const extensions = [
 	/**
 	 * ! Included Extensions
 	 *
-	 * * Blockquote
+	 * * Blockquote ✔️
 	 * * BulletList ✔️
+	 * * CodeBlock ✔️
 	 * * Document [ CORE ]: Root
 	 * * HardBreak
 	 * * Heading
@@ -46,9 +47,19 @@ const extensions = [
 		},
 		horizontalRule: {
 			HTMLAttributes: {
-				class: 'border bg-primary rounded'
-			}
-		}
+				class: "border bg-primary rounded",
+			},
+		},
+		codeBlock: {
+			HTMLAttributes: {
+				class: "bg-gray-500/10  p-4 rounded-lg shadow",
+			},
+		},
+		blockquote: {
+			HTMLAttributes: {
+				class: "px-12 my-4 text-justify",
+			},
+		},
 	}),
 	TipTapUnderline,
 	TipTapFontFamily,
