@@ -17,10 +17,10 @@ import {
 const { editor, note } = useEdit();
 
 interface ButtonAction {
-	icon: string;
+	icon?: string;
 	action: () => unknown;
-	disabled: () => boolean;
-	active: () => boolean;
+	disabled?: () => boolean;
+	active?: () => boolean;
 	tooltip: string;
 }
 
@@ -86,6 +86,19 @@ const fontFamily: SelectAction[] = [
 		value: "cursive",
 	},
 ];
+
+const list: ButtonAction[] = [
+	{
+		action: () => editor.value?.chain().focus().toggleBulletList().run(),
+		tooltip: "Toggle Bullet List",
+		icon: "material-symbols:format-list-bulleted-rounded",
+	},
+	{
+		action: () => editor.value?.chain().focus().toggleOrderedList().run(),
+		tooltip: "Toggle Ordered List",
+		icon: "flowbite:ordered-list-outline",
+	},
+];
 </script>
 
 <template>
@@ -104,7 +117,11 @@ const fontFamily: SelectAction[] = [
 							variant="outline"
 							size="sm"
 						>
-							<Icon :name="button.icon" />
+							<Icon
+								v-if="button.icon"
+								:name="button.icon"
+								class="text-xl"
+							/>
 						</Button>
 					</TooltipTrigger>
 					<TooltipContent>
@@ -129,6 +146,27 @@ const fontFamily: SelectAction[] = [
 					</SelectItem>
 				</SelectContent>
 			</Select>
+
+			<TooltipProvider v-for="item in list">
+				<Tooltip>
+					<TooltipTrigger>
+						<Button
+							@click="item.action"
+							variant="outline"
+							size="sm"
+						>
+							<Icon
+								v-if="item.icon"
+								:name="item.icon"
+								class="text-xl"
+							/>
+						</Button>
+					</TooltipTrigger>
+					<TooltipContent>
+						<p>{{ item.tooltip }}</p>
+					</TooltipContent>
+				</Tooltip>
+			</TooltipProvider>
 
 			<EditAutoSave />
 		</div>
@@ -223,18 +261,6 @@ const fontFamily: SelectAction[] = [
 				}"
 			>
 				h6
-			</button>
-			<button
-				@click="editor.chain().focus().toggleBulletList().run()"
-				:class="{ 'is-active': editor.isActive('bulletList') }"
-			>
-				bullet list
-			</button>
-			<button
-				@click="editor.chain().focus().toggleOrderedList().run()"
-				:class="{ 'is-active': editor.isActive('orderedList') }"
-			>
-				ordered list
 			</button>
 			<button
 				@click="editor.chain().focus().toggleCodeBlock().run()"

@@ -31,7 +31,20 @@ const extensions = [
 	 * * TextStyle
 	 *
 	 */
-	TipTapStarterKit.configure({}),
+	TipTapStarterKit.configure({
+		bulletList: {
+			keepMarks: true,
+			keepAttributes: true,
+			HTMLAttributes: {
+				class: "list-disc pl-6",
+			},
+		},
+		orderedList: {
+			HTMLAttributes: {
+				class: "list-decimal pl-6",
+			},
+		},
+	}),
 	TipTapUnderline,
 	TipTapFontFamily,
 	TipTapTextStyle,

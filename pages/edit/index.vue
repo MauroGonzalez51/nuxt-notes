@@ -25,7 +25,7 @@ const { note } = useEdit();
 			>
 			<Title v-else> Editing {{ note.title }} </Title>
 		</Head>
-	
+
 		<ClientOnly>
 			<EditEditor />
 		</ClientOnly>
