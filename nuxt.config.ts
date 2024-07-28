@@ -3,15 +3,16 @@ export default defineNuxtConfig({
 	compatibilityDate: "2024-04-03",
 	devtools: { enabled: true },
 	modules: [
-        "@nuxtjs/tailwindcss",
-        "@nuxt/fonts",
-        "@nuxt/icon",
-        "shadcn-nuxt",
-        "@sidebase/nuxt-auth",
-        "@nuxt/image",
-        "@nuxtjs/color-mode",
-        "nuxt-tiptap-editor"
-    ],
+		"@nuxtjs/tailwindcss",
+		"@nuxt/fonts",
+		"@nuxt/icon",
+		"shadcn-nuxt",
+		"@sidebase/nuxt-auth",
+		"@nuxt/image",
+		"@nuxtjs/color-mode",
+		"nuxt-tiptap-editor",
+		"@prisma/nuxt",
+	],
 	runtimeConfig: {
 		AUTH_SECRET: process.env.AUTH_SECRET,
 		GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
@@ -29,6 +30,11 @@ export default defineNuxtConfig({
 		globalAppMiddleware: true,
 	},
 	tiptap: {
-		prefix: 'TipTap'
-	}
+		prefix: "TipTap",
+	},
+	prisma: {
+		installStudio: true,
+		installCLI: true,
+		autoSetupPrisma: true,
+	},
 });

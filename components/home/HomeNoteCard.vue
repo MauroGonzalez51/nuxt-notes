@@ -28,11 +28,15 @@ interface Props {
 const { note } = defineProps<Props>();
 
 const { data: session } = useAuth();
-const editor = useEditor({ extensions, editorProps: {
-	attributes: {
-		class: 'p-2 focus:outline-none'
-	}
-} });
+const editor = useEditor({
+	extensions,
+	editable: false,
+	editorProps: {
+		attributes: {
+			class: "p-2 focus:outline-none select-none",
+		},
+	},
+});
 
 const formattedDate = new Date(note.createdAt).toLocaleDateString("en-Es", {
 	year: "numeric",
@@ -109,3 +113,9 @@ onMounted(() => {
 		</div>
 	</Card>
 </template>
+
+<style lang="css">
+.tiptap > * {
+	@apply select-none;
+}
+</style>
