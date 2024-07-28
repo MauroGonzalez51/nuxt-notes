@@ -1,6 +1,7 @@
 import TipTapUnderline from "@tiptap/extension-underline";
 import TipTapFontFamily from "@tiptap/extension-font-family";
 import TipTapTextStyle from "@tiptap/extension-text-style";
+import TipTapImage from "@tiptap/extension-image";
 
 const extensions = [
 	/**
@@ -67,6 +68,11 @@ const extensions = [
 	TipTapUnderline,
 	TipTapFontFamily,
 	TipTapTextStyle,
+	TipTapImage.configure({
+		HTMLAttributes: {
+			class: 'w-full rounded-md my-2'
+		}
+	}),
 ];
 
 export { extensions };

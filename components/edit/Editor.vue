@@ -13,6 +13,16 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+	DialogClose,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
 
 const { editor, note } = useEdit();
 
@@ -130,6 +140,22 @@ const items: ButtonAction[] = [
 		tooltip: "Set Heading level to 3",
 	},
 ];
+
+function addImage(event: Event) {
+	if (!(event instanceof SubmitEvent)) return;
+	if (!(event.target instanceof HTMLFormElement)) return;
+
+	const { elements } = event.target;
+	const inputElement = elements.namedItem("url");
+
+	if (!(inputElement instanceof HTMLInputElement)) return;
+
+	const URL = inputElement.value;
+
+	if (!URL) return;
+
+	editor.value?.chain().focus().setImage({ src: URL }).run();
+}
 </script>
 
 <template>
@@ -200,6 +226,46 @@ const items: ButtonAction[] = [
 				</Tooltip>
 			</TooltipProvider>
 
+			<Dialog>
+				<DialogTrigger>
+					<TooltipProvider>
+						<Tooltip>
+							<TooltipTrigger>
+								<Button variant="outline" size="sm">
+									<Icon
+										name="material-symbols:add-photo-alternate-outline"
+										class="text-xl"
+									/>
+								</Button>
+							</TooltipTrigger>
+							<TooltipContent>
+								<p>Add an Image</p>
+							</TooltipContent>
+						</Tooltip>
+					</TooltipProvider>
+				</DialogTrigger>
+				<DialogContent>
+					<DialogHeader>
+						<DialogTitle>Add an Image</DialogTitle>
+						<DialogDescription>
+							The image will be displayed in the note. Paste the
+							URL below.
+						</DialogDescription>
+					</DialogHeader>
+
+					<form class="grid flex-1 gap-3" @submit.prevent="addImage">
+						<Label for="url" class="sr-only"> URL </Label>
+						<Input
+							name="url"
+							placeholder="https://randomimage.com"
+						/>
+						<DialogClose as-child>
+							<Button type="submit"> Add </Button>
+						</DialogClose>
+					</form>
+				</DialogContent>
+			</Dialog>
+
 			<EditAutoSave />
 		</div>
 
@@ -219,15 +285,15 @@ const items: ButtonAction[] = [
 </template>
 
 <style lang="css">
-h1 {
+.tiptap h1 {
 	@apply font-bold text-3xl;
 }
 
-h2 {
+.tiptap h2 {
 	@apply font-semibold text-2xl;
 }
 
-h3 {
-	@apply text-xl
+.tiptap h3 {
+	@apply text-xl;
 }
 </style>

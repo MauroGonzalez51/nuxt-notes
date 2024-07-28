@@ -17,6 +17,7 @@
     "@prisma/nuxt": "^0.0.30",
     "@sidebase/nuxt-auth": "^0.8.1",
     "@tiptap/extension-font-family": "^2.5.7",
+    "@tiptap/extension-image": "^2.5.7",
     "@tiptap/extension-text-style": "^2.5.7",
     "@tiptap/extension-underline": "^2.5.7",
     "@vueuse/core": "^10.11.0",

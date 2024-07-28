@@ -8,7 +8,7 @@ const { error, refresh } = useEdit();
 		class="border px-6 py-4 rounded-md shadow-md flex flex-col md:flex-row md:justify-between gap-4 md:gap-0 max-w-5xl lg:mx-auto"
 	>
 		<div>
-			<h1 class="font-bold">An error ocurred while gathering the note</h1>
+			<span class="font-bold block">An error ocurred while gathering the note</span>
 			<span class="text-sm">
 				{{ error.statusMessage }}
 			</span>

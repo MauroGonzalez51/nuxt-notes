@@ -17,7 +17,7 @@ export default function () {
 		error,
 		refresh,
 	} = useFetch<Note>("/api/notes", {
-		key: "note",
+		key: `note-${noteId.value}`,
 		query: {
 			noteId,
 		},
@@ -29,7 +29,7 @@ export default function () {
 		extensions,
 		editorProps: {
 			attributes: {
-				class: "p-4 border border-primary/10 dark:border-primary/50 rounded-md shadow focus:outline-2 focus:outline-primary",
+				class: "p-6 border border-primary/10 dark:border-primary/50 rounded-md shadow focus:outline-2 focus:outline-primary",
 			},
 		},
 		onUpdate: ({ editor }) => {
