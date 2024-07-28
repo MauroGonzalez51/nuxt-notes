@@ -19,6 +19,7 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { extensions } from "@/lib/tiptap";
 
 interface Props {
 	note: Note;
@@ -27,16 +28,27 @@ interface Props {
 const { note } = defineProps<Props>();
 
 const { data: session } = useAuth();
+const editor = useEditor({ extensions, editorProps: {
+	attributes: {
+		class: 'p-2 focus:outline-none'
+	}
+} });
 
 const formattedDate = new Date(note.createdAt).toLocaleDateString("en-Es", {
 	year: "numeric",
 	month: "long",
 	day: "numeric",
 });
+
+onMounted(() => {
+	if (!note.content) return;
+
+	editor.value?.commands.setContent(note.content);
+});
 </script>
 
 <template>
-	<Card class="dark:bg-gray-800 relative overflow-hidden">
+	<Card class="dark:bg-gray-800 relative">
 		<CardHeader>
 			<CardTitle>
 				{{ note.title }}
@@ -49,9 +61,7 @@ const formattedDate = new Date(note.createdAt).toLocaleDateString("en-Es", {
 			</div>
 		</CardHeader>
 		<CardContent class="h-24 line-clamp-4">
-			<p>
-				{{ note.content }}
-			</p>
+			<LazyTipTapEditorContent :editor="editor" read-only />
 		</CardContent>
 		<CardFooter class="flex items-center justify-between mt-2">
 			<div class="text-sm text-muted-foreground">
@@ -59,7 +69,10 @@ const formattedDate = new Date(note.createdAt).toLocaleDateString("en-Es", {
 			</div>
 
 			<Button variant="outline" size="sm" class="">
-				<NuxtLink class="w-full h-full inline-flex items-center" :to="{ path: '/edit', query: { noteId: note.id } }">
+				<NuxtLink
+					class="w-full h-full inline-flex items-center"
+					:to="{ path: '/edit', query: { noteId: note.id } }"
+				>
 					<Icon name="mdi:file-edit-outline" class="mr-2 h-4 w-4" />
 					Edit
 				</NuxtLink>

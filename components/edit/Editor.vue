@@ -139,6 +139,11 @@ const items: ButtonAction[] = [
 		icon: "hugeicons:heading-03",
 		tooltip: "Set Heading level to 3",
 	},
+	{
+		action: () => editor.value?.chain().focus().toggleBlockquote().run(),
+		icon: "mingcute:blockquote-line",
+		tooltip: "Toggle Blockquote",
+	},
 ];
 
 function addImage(event: Event) {
@@ -295,5 +300,9 @@ function addImage(event: Event) {
 
 .tiptap h3 {
 	@apply text-xl;
+}
+
+.tiptap blockquote {
+	@apply px-12 my-4 text-justify
 }
 </style>

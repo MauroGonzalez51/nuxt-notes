@@ -56,11 +56,6 @@ const extensions = [
 				class: "bg-gray-500/10  p-4 rounded-lg shadow",
 			},
 		},
-		blockquote: {
-			HTMLAttributes: {
-				class: "px-12 my-4 text-justify",
-			},
-		},
 		heading: {
 			levels: [1, 2, 3],
 		},
@@ -70,7 +65,7 @@ const extensions = [
 	TipTapTextStyle,
 	TipTapImage.configure({
 		HTMLAttributes: {
-			class: 'w-full rounded-md my-2'
+			class: 'w-full block rounded-md my-6'
 		}
 	}),
 ];
