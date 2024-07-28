@@ -87,7 +87,7 @@ const fontFamily: SelectAction[] = [
 	},
 ];
 
-const list: ButtonAction[] = [
+const items: ButtonAction[] = [
 	{
 		action: () => editor.value?.chain().focus().toggleBulletList().run(),
 		tooltip: "Toggle Bullet List",
@@ -97,6 +97,11 @@ const list: ButtonAction[] = [
 		action: () => editor.value?.chain().focus().toggleOrderedList().run(),
 		tooltip: "Toggle Ordered List",
 		icon: "flowbite:ordered-list-outline",
+	},
+	{
+		action: () => editor.value?.chain().focus().setHorizontalRule().run(),
+		icon: "material-symbols:horizontal-rule-rounded",
+		tooltip: "Set Horizontal Rule",
 	},
 ];
 </script>
@@ -147,7 +152,7 @@ const list: ButtonAction[] = [
 				</SelectContent>
 			</Select>
 
-			<TooltipProvider v-for="item in list">
+			<TooltipProvider v-for="item in items">
 				<Tooltip>
 					<TooltipTrigger>
 						<Button
@@ -167,6 +172,8 @@ const list: ButtonAction[] = [
 					</TooltipContent>
 				</Tooltip>
 			</TooltipProvider>
+
+						
 
 			<EditAutoSave />
 		</div>

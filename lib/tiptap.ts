@@ -7,15 +7,15 @@ const extensions = [
 	 * ! Included Extensions
 	 *
 	 * * Blockquote
-	 * * BulletList
-	 * * Document
+	 * * BulletList ✔️
+	 * * Document [ CORE ]: Root
 	 * * HardBreak
 	 * * Heading
-	 * * HorizontalRule
-	 * * ListItem
-	 * * OrderedList
-	 * * Paragraph
-	 * * Text
+	 * * HorizontalRule ✔️
+	 * * ListItem [ Required ]: BulletList OrderedList
+	 * * OrderedList ✔️
+	 * * Paragraph [ CORE ]: Root
+	 * * Text [ CORE ]: Root
 	 *
 	 * * Bold ✔️
 	 * * Code
@@ -27,8 +27,8 @@ const extensions = [
 	 * * History
 	 *
 	 * * Underline ✔️
-	 * * FontFamily
-	 * * TextStyle
+	 * * FontFamily ✔️
+	 * * TextStyle [ Required ]: FontFamily
 	 *
 	 */
 	TipTapStarterKit.configure({
@@ -44,6 +44,11 @@ const extensions = [
 				class: "list-decimal pl-6",
 			},
 		},
+		horizontalRule: {
+			HTMLAttributes: {
+				class: 'border bg-primary rounded'
+			}
+		}
 	}),
 	TipTapUnderline,
 	TipTapFontFamily,
