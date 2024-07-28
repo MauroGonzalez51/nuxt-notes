@@ -108,6 +108,27 @@ const items: ButtonAction[] = [
 		icon: "material-symbols:code-blocks-outline",
 		tooltip: "Toggle Code Block",
 	},
+	{
+		action: () =>
+			editor.value?.chain().focus().toggleHeading({ level: 1 }).run(),
+		active: () => !editor.value?.isActive("heading", { level: 1 }) || false,
+		icon: "hugeicons:heading-01",
+		tooltip: "Set Heading level to 1",
+	},
+	{
+		action: () =>
+			editor.value?.chain().focus().toggleHeading({ level: 2 }).run(),
+		active: () => !editor.value?.isActive("heading", { level: 2 }) || false,
+		icon: "hugeicons:heading-02",
+		tooltip: "Set Heading level to 2",
+	},
+	{
+		action: () =>
+			editor.value?.chain().focus().toggleHeading({ level: 3 }).run(),
+		active: () => !editor.value?.isActive("heading", { level: 3 }) || false,
+		icon: "hugeicons:heading-03",
+		tooltip: "Set Heading level to 3",
+	},
 ];
 </script>
 
@@ -162,6 +183,7 @@ const items: ButtonAction[] = [
 					<TooltipTrigger>
 						<Button
 							@click="item.action"
+							:class="{ 'is-active': item?.active }"
 							variant="outline"
 							size="sm"
 						>
@@ -195,3 +217,17 @@ const items: ButtonAction[] = [
 		<TipTapEditorContent :editor="editor" />
 	</div>
 </template>
+
+<style lang="css">
+h1 {
+	@apply font-bold text-3xl;
+}
+
+h2 {
+	@apply font-semibold text-2xl;
+}
+
+h3 {
+	@apply text-xl
+}
+</style>

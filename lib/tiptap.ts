@@ -60,6 +60,9 @@ const extensions = [
 				class: "px-12 my-4 text-justify",
 			},
 		},
+		heading: {
+			levels: [1, 2, 3],
+		},
 	}),
 	TipTapUnderline,
 	TipTapFontFamily,
