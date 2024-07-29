@@ -19,7 +19,7 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { extensions } from "@/lib/tiptap";
+import { extensions } from "@/lib/tiptap/extensions";
 
 interface Props {
 	note: Note;

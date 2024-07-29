@@ -1,5 +1,5 @@
 import type { Note } from "@/lib/definitions";
-import { extensions } from "@/lib/tiptap";
+import { extensions } from "@/lib/tiptap/extensions";
 
 const DEFAULT_AUTOSAVE_SECONDS: number = 10;
 

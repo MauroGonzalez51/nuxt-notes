@@ -146,6 +146,10 @@ const items: ButtonAction[] = [
 	},
 ];
 
+const fontSizes: Number[] = [
+	8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72,
+];
+
 function addImage(event: Event) {
 	if (!(event instanceof SubmitEvent)) return;
 	if (!(event.target instanceof HTMLFormElement)) return;
@@ -205,6 +209,27 @@ function addImage(event: Event) {
 				<SelectContent>
 					<SelectItem v-for="item in fontFamily" :value="item.value">
 						{{ item.label }}
+					</SelectItem>
+				</SelectContent>
+			</Select>
+
+			<Select
+				:onUpdate:modelValue="
+					(payload) =>
+						editor?.chain().focus().setTextSize(payload).run()
+				"
+				defaultValue="16"
+			>
+				<SelectTrigger class="w-32 max-w-sm">
+					<SelectValue placeholder="Font size" />
+				</SelectTrigger>
+				<SelectContent>
+					<SelectItem
+						v-for="size in fontSizes"
+						:value="size.toString()"
+						:key="size.toString()"
+					>
+						{{ size.toString() }}
 					</SelectItem>
 				</SelectContent>
 			</Select>
@@ -303,6 +328,6 @@ function addImage(event: Event) {
 }
 
 .tiptap blockquote {
-	@apply px-12 my-4 text-justify
+	@apply px-12 my-4 text-justify;
 }
 </style>
