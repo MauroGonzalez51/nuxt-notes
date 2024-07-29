@@ -22,6 +22,11 @@ import {
 	DialogTrigger,
 	DialogClose,
 } from "@/components/ui/dialog";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Label } from "@/components/ui/label";
 
 const { editor, note } = useEdit();
@@ -234,9 +239,32 @@ function addImage(event: Event) {
 				</SelectContent>
 			</Select>
 
-			<Button @click="editor.chain().focus().setTextColor('red').run()">
-				Color
-			</Button>
+			<DropdownMenu>
+				<DropdownMenuTrigger>
+					<TooltipProvider>
+						<Tooltip>
+							<TooltipTrigger>
+								<Button variant="outline" size="sm">
+									<Icon
+										name="ri:font-color"
+										class="text-xl"
+									/>
+								</Button>
+							</TooltipTrigger>
+							<TooltipContent>
+								<p>Text Color</p>
+							</TooltipContent>
+						</Tooltip>
+					</TooltipProvider>
+				</DropdownMenuTrigger>
+				<DropdownMenuContent>
+					<Input
+						type="color"
+						:onUpdate:modelValue="(payload: string | number) => 
+						editor?.chain().focus().setTextColor(payload.toString()).run()"
+					/>
+				</DropdownMenuContent>
+			</DropdownMenu>
 
 			<TooltipProvider v-for="item in items">
 				<Tooltip>

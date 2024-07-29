@@ -41,6 +41,7 @@
     "@iconify-json/material-symbols-light": "^1.1.25",
     "@iconify-json/mdi": "^1.1.67",
     "@iconify-json/mingcute": "^1.1.18",
+    "@iconify-json/ri": "^1.1.21",
     "@iconify-json/uil": "^1.1.8",
     "@nuxtjs/color-mode": "^3.4.2",
     "@nuxtjs/tailwindcss": "^6.12.1",
