@@ -28,22 +28,9 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Label } from "@/components/ui/label";
+import type { ButtonAction, SelectAction } from "@/lib/definitions";
 
 const { editor, note } = useEdit();
-
-interface ButtonAction {
-	icon?: string;
-	action: () => unknown;
-	disabled?: () => boolean;
-	active?: () => boolean;
-	tooltip: string;
-}
-
-interface SelectAction {
-	label?: string;
-	icon?: string;
-	value: string;
-}
 
 const basicButtons: ButtonAction[] = [
 	{
@@ -155,7 +142,7 @@ const fontSizes: Number[] = [
 	8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72,
 ];
 
-function addImage(event: Event) {
+function handleAddImage(event: Event) {
 	if (!(event instanceof SubmitEvent)) return;
 	if (!(event.target instanceof HTMLFormElement)) return;
 
@@ -315,7 +302,10 @@ function addImage(event: Event) {
 						</DialogDescription>
 					</DialogHeader>
 
-					<form class="grid flex-1 gap-3" @submit.prevent="addImage">
+					<form
+						class="grid flex-1 gap-3"
+						@submit.prevent="handleAddImage"
+					>
 						<Label for="url" class="sr-only"> URL </Label>
 						<Input
 							name="url"
@@ -336,6 +326,7 @@ function addImage(event: Event) {
 			:defaultValue="note.title"
 			class="max-w-md shadow"
 			placeholder="Note title ..."
+			autocomplete="off"
 			@update:modelValue="(payload: string | number) => {
 				if (!note) return;
 				note.title = payload?.toString();
