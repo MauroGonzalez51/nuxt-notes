@@ -4,7 +4,6 @@ export interface ButtonAction {
 	icon?: string;
 	action: () => unknown;
 	disabled?: () => boolean;
-	active?: () => boolean;
 	tooltip: string;
 }
 

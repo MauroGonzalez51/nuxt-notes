@@ -37,7 +37,6 @@ const basicButtons: ButtonAction[] = [
 		icon: "ic:baseline-format-bold",
 		action: () => editor.value?.chain().focus().toggleBold().run(),
 		disabled: () => !editor.value?.can().chain().focus().toggleBold().run(),
-		active: () => editor.value?.isActive("bold") || false,
 		tooltip: "Bold",
 	},
 	{
@@ -45,7 +44,6 @@ const basicButtons: ButtonAction[] = [
 		action: () => editor.value?.chain().focus().toggleItalic().run(),
 		disabled: () =>
 			!editor.value?.can().chain().focus().toggleItalic().run(),
-		active: () => editor.value?.isActive("italic") || false,
 		tooltip: "Italic",
 	},
 	{
@@ -53,7 +51,6 @@ const basicButtons: ButtonAction[] = [
 		action: () => editor.value?.chain().focus().toggleUnderline().run(),
 		disabled: () =>
 			!editor.value?.can().chain().focus().toggleUnderline().run(),
-		active: () => editor.value?.isActive("underline") || false,
 		tooltip: "Underline",
 	},
 	{
@@ -61,7 +58,6 @@ const basicButtons: ButtonAction[] = [
 		action: () => editor.value?.chain().focus().toggleStrike().run(),
 		disabled: () =>
 			!editor.value?.can().chain().focus().toggleStrike().run(),
-		active: () => editor.value?.isActive("strike") || false,
 		tooltip: "Strike",
 	},
 ];
@@ -113,21 +109,18 @@ const items: ButtonAction[] = [
 	{
 		action: () =>
 			editor.value?.chain().focus().toggleHeading({ level: 1 }).run(),
-		active: () => !editor.value?.isActive("heading", { level: 1 }) || false,
 		icon: "hugeicons:heading-01",
 		tooltip: "Set Heading level to 1",
 	},
 	{
 		action: () =>
 			editor.value?.chain().focus().toggleHeading({ level: 2 }).run(),
-		active: () => !editor.value?.isActive("heading", { level: 2 }) || false,
 		icon: "hugeicons:heading-02",
 		tooltip: "Set Heading level to 2",
 	},
 	{
 		action: () =>
 			editor.value?.chain().focus().toggleHeading({ level: 3 }).run(),
-		active: () => !editor.value?.isActive("heading", { level: 3 }) || false,
 		icon: "hugeicons:heading-03",
 		tooltip: "Set Heading level to 3",
 	},
@@ -170,7 +163,6 @@ function handleAddImage(event: Event) {
 					<TooltipTrigger>
 						<Button
 							@click="button.action"
-							:class="{ 'is-active': button.active }"
 							:disabled="!button.disabled"
 							variant="outline"
 							size="sm"
@@ -258,7 +250,6 @@ function handleAddImage(event: Event) {
 					<TooltipTrigger>
 						<Button
 							@click="item.action"
-							:class="{ 'is-active': item?.active }"
 							variant="outline"
 							size="sm"
 						>
@@ -352,5 +343,9 @@ function handleAddImage(event: Event) {
 
 .tiptap blockquote {
 	@apply px-12 my-4 text-justify;
+}
+
+.is-active {
+	background-color: red;
 }
 </style>
