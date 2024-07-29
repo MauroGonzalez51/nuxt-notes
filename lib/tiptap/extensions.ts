@@ -3,6 +3,7 @@ import TipTapFontFamily from "@tiptap/extension-font-family";
 import TipTapTextStyle from "@tiptap/extension-text-style";
 import TipTapImage from "@tiptap/extension-image";
 import TipTapTextSize from "@/lib/tiptap/TextSize";
+import TipTapTextColor from "@/lib/tiptap/TextColor";
 
 const extensions = [
 	/**
@@ -70,6 +71,7 @@ const extensions = [
 		},
 	}),
 	TipTapTextSize,
+	TipTapTextColor,
 ];
 
 export { extensions };

@@ -234,6 +234,10 @@ function addImage(event: Event) {
 				</SelectContent>
 			</Select>
 
+			<Button @click="editor.chain().focus().setTextColor('red').run()">
+				Color
+			</Button>
+
 			<TooltipProvider v-for="item in items">
 				<Tooltip>
 					<TooltipTrigger>
